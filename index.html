@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="sr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +8,55 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 100px;
-            background-color: #f0f8ff;
+            padding: 50px;
+            background-color: #f0f0f0;
         }
-        h1 {
-            color: #2e8b57;
-            font-size: 3rem;
+        #tekst {
+            font-size: 28px;
+            line-height: 1.6;
+            min-height: 200px;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <h1>Zdravo svete! 🌍</h1>
+
+    <h1>Poruka</h1>
+    <div id="tekst"></div>
+
+    <script>
+        const tekst = "Zdravo svete. Ja sam Marko Ostojić. Imam 30 godina. Živim u Sloveniji.";
+        const rijeci = tekst.split(' '); // razdvajamo po razmacima
+
+        let index = 0;
+        let interval;
+
+        const container = document.getElementById('tekst');
+
+        function pokreniPrikaz() {
+            container.innerHTML = ''; // očisti prethodni tekst
+            index = 0;
+
+            interval = setInterval(() => {
+                if (index < rijeci.length) {
+                    // dodaj riječ + razmak
+                    container.innerHTML += rijeci[index] + ' ';
+                    index++;
+                } else {
+                    // kada završi sve riječi
+                    clearInterval(interval);
+                    
+                    // sačekaj 5 sekundi pa ponovo pokreni
+                    setTimeout(() => {
+                        pokreniPrikaz();
+                    }, 5000);
+                }
+            }, 1000); // svaka riječ svake sekunde
+        }
+
+        // Pokreni prvi put
+        pokreniPrikaz();
+    </script>
+
 </body>
 </html>
